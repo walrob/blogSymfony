@@ -1,0 +1,10 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block body %}
+    <h2>Editar Categoría "{{ category.name }}"</h2>
+
+    {% include 'post/_form.html.twig' with {'form': form} only %}
+
+    <a href="{{ path('admin.category.list') }}" class="btn btn-outline-secondary ml-auto">Volver atrás</a>
+
+{% endblock %}

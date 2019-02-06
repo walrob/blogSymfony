@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <style>
+        .material-icons { vertical-align: middle; margin-right: 3px;}
+        .card-margin { margin-top: 15px; }
+        .row-margin { margin-bottom: 15px; }
+        .card-title { font-size: 12px; }
+        .material-icons { 
+            vertical-align: top; 
+            margin-right: 15px; 
+            margin-left: 5px; 
+            width: 6px; 
+            height: 6px;
+            color: #6C757D;
+        }
+    </style>
+    <div class="row row-margin">
+        {% for post in posts|slice(0, 5) %}
+            <div class="card card-margin">
+
+                <h4 class="card-header">{{ post.title }}</h4>
+                
+                <div class="card-body">
+                    <p class="card-title"><i class="material-icons">person</i> {{ post.author.name }}  <i class="material-icons">category</i> {{ post.category.name }}</p>
+                    <p class="card-text">{{ post.Content|slice(0, 150) }}...</p>
+                    <a href="{{ path('post.show', {id: post.id}) }}" class="btn btn-light">Leer más</a>
+                </div>
+            </div>
+        {% endfor %}
+        
+    </div>
+{% endblock %}

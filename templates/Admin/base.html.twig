@@ -1,0 +1,67 @@
+{% extends 'structure.html.twig' %}
+
+{% block mainbody %}
+    <style>
+        .button-margin { margin-left: 5px; }
+        .navbar { z-index: 2; }
+        .navbar-brand { width: 140px; }
+        .sidenav {
+            height: 100%;
+            width: 160px;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #eee;
+            overflow-x: hidden;
+            padding-top: 75px;
+        }
+        .sidenav a {
+            padding: 6px 8px 6px 16px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #818181;
+            display: block;
+        }
+        .sidenav a:hover { color: #000000; }
+        .main { margin-left: 160px; padding: 0px 40px; }
+        @media screen and (max-height: 450px) { .sidenav {padding-top: 15px;} .sidenav a {font-size: 18px;} }
+    </style>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="{{ path('home') }}">BLOG</a>
+        <div class="collapse navbar-collapse">
+        </div>
+        <a class="btn btn-outline-primary button-margin" role="button" href="{{ path('home') }}">Panel User</a>
+        <a class="btn btn-outline-primary button-margin" role="button" href="{{ path('fos_user_security_logout') }}">Salir</a>
+    </nav>
+
+    <div classs="row">
+        <div class="sidenav">
+            {% set currentRouteName = app.request.get('_route') %}
+
+            <ul class="nav nav-pills nav-stacked">
+                <li role="presentation" {% if currentRouteName starts with 'admin.category.' %}class="active"{% endif %}>
+                    <a href="{{ path('admin.category.list') }}">Admin Categoría</a>
+                </li>
+
+                <li role="presentation" {% if currentRouteName starts with 'admin.post.' %}class="active"{% endif %}>
+                    <a href="{{ path('admin.post.list') }}">Admin Post</a>
+                </li>
+
+                <li role="presentation" {% if currentRouteName starts with 'admin.categoty.' %}class="active"{% endif %}>
+                    <a href="{{ path('admin.category.create') }}">Nueva Categoría</a>
+                </li>
+
+                <li role="presentation" {% if currentRouteName starts with 'admin.post.' %}class="active"{% endif %}>
+                    <a href="{{ path('admin.post.create') }}">Nuevo Post</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="main">
+            {% block body %}{% endblock %}
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,13 @@
+<style>
+    .button-rigth { position: absolute; right: 0px; margin-right: 20px; }
+</style>
+
+{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+    {{ form_widget(form) }}
+
+    <div class="form-group">
+        <div class="col-sm-offset-6 col-sm-6 d-flex button-rigth">
+            <button type="submit" class="btn btn-outline-secondary ml-auto">Guardar</button>
+        </div>
+    </div>
+{{ form_end(form) }}

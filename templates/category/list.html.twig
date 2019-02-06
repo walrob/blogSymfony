@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <style>
+        .table-margin { margin-top: 15px; margin-bottom: 15px; }
+    </style>
+    <div class="row table-margin">
+        <table class="table text-center">
+            <thead>
+            <tr class="active">
+                <th class="text-center">Nombre</th>
+                <th class="text-center">Cant. Post</th>
+                <th class="text-center">Descripción</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for category in categories %}
+                <tr>
+                    <td>{{ category.name }}</td>
+                    <td>{{ category.posts.count }}</td>
+                    <td>{{ category.description }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

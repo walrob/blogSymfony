@@ -1,0 +1,48 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block body %}
+    <style>
+        .table-margin { margin-top: 15px; margin-bottom: 15px; }
+        .button-delete { display: inline; }
+        .navigation { float: none; margin: 0 auto; display: table; }
+    </style>
+    <div class="table-margin">
+    <table class="table text-center">
+        <thead>
+        <tr class="active">
+            <th class="text-center">Categoría</th>
+            <th class="text-center">Autor</th>
+            <th class="text-center">Título</th>
+            <th class="text-center">Texto</th>
+            <th class="text-center">Fecha</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for post in posts %}
+            <tr>
+                <td>{{ post.category.name }}</td>
+                <td>{{ post.author.name }}</td>
+                <td>{{ post.title }}</td>
+                <td>{{ post.content|slice(0, 150) }}... <a href="{{ path('post.show', {id: post.id}) }}">Leer más</a></td>
+                <td>{{ post.publishedAt|date('d-m-Y') }}</td>
+                <td class="text-nowrap">
+                    <a href="{{ path('admin.post.edit', {id: post.id}) }}" class="btn btn-outline-success btn-sm"><i class="material-icons">edit</i></a>
+                    
+                    <form class="button-delete" method="post" action="{{ path('admin.post.delete', {id: post.id}) }}" onsubmit="return confirm('¿Seguro que desea eliminar el Post?');">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ post.id) }}">
+                        <button class="btn btn-outline-danger btn-sm"><i class="material-icons">delete_forever</i></a>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+    
+    <div class="row navigation">
+        {{ knp_pagination_render(posts) }}
+    </div>
+
+{% endblock %}

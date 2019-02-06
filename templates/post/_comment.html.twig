@@ -1,0 +1,11 @@
+<style>
+    .button-rigth { position: absolute; right: 0px; }
+</style>
+
+{# {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }} #}
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+    <div class="form-group d-flex button-rigth">
+        <button type="submit" class="btn btn-outline-secondary ml-auto">Publicar</button>
+    </div>
+{{ form_end(form) }}
