@@ -59,6 +59,37 @@ class PostController extends AbstractController
     }
 
     /**
+     * Create post.
+     *
+     * @Route("/user/post/create", name="post.create", methods="GET|POST")
+     *
+     * @param Request $request
+     * @param EntityManagerInterface $em
+     *
+     * @return Response
+     */
+    public function create(Request $request, EntityManagerInterface $em, TokenStorageInterface $tokenStorage) : Response
+    {
+        $post = new Post();
+        $form = $this->createForm(PostType::class, $post);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user = $tokenStorage->getToken()->getUser();
+            $post->setAuthor($em->merge($user));
+
+            $em->persist($post);
+            $em->flush();
+
+            return $this->redirectToRoute('post.list');
+        }
+
+        return $this->render('post/create.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
      * Show post.
      *
      * @Route("/user/post/{id}", name="post.show", methods="GET|POST")
@@ -89,37 +120,6 @@ class PostController extends AbstractController
 
         return $this->render('post/show.html.twig', [
             'post' => $post,
-            'form' => $form->createView(),
-        ]);
-    }
-
-    /**
-     * Create post.
-     *
-     * @Route("/user/post/create", name="post.create", methods="GET|POST")
-     *
-     * @param Request $request
-     * @param EntityManagerInterface $em
-     *
-     * @return Response
-     */
-    public function create(Request $request, EntityManagerInterface $em, TokenStorageInterface $tokenStorage) : Response
-    {
-        $post = new Post();
-        $form = $this->createForm(PostType::class, $post);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $user = $tokenStorage->getToken()->getUser();
-            $post->setAuthor($em->merge($user));
-
-            $em->persist($post);
-            $em->flush();
-
-            return $this->redirectToRoute('post.list');
-        }
-
-        return $this->render('post/create.html.twig', [
             'form' => $form->createView(),
         ]);
     }

@@ -22,10 +22,13 @@ Siga los siguientes pasos para poder configurar el entorno de desarrollo. Utilic
 6 - Crear una Base de Dato llamada desafio_blog
 
 7 - Hacer la migración de las Entidades a la Base de Datos ingresando en la consola:
+    
     $ php bin/console doctrine:migrations:migrate
 
 8 - Cargar los datos de Fixtures a las tablas:
+    
     $ php bin/console doctrine:fixtures:load
 
 9 - Ingrese para ejecutar el proyecto en el puerto configurado (localhost:8000):
+    
     $ php bin/console server:run
