@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h2>Editar Post</h2>
+
+    {% include 'post/_form.html.twig' with {'form': form} only %}
+
+    <a href="{{ path('post.list') }}" class="btn btn-outline-secondary">Volver atrás</a>
+    
+{% endblock %}
