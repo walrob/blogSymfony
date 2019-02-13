@@ -1,0 +1,66 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block body %}
+    <style>
+        .comment-margin { margin-top: 20px; }
+        .card-margin { margin-top: 10px; width: 100%; }
+        .card-header { font-size: 15px; }
+        .card-icons { 
+            vertical-align: top; 
+            margin-right: 10px; 
+            margin-left: 5px; 
+            width: 10px; 
+            height: 10px;
+            color: #6C757D;
+        }
+        .text-content { white-space: pre-wrap; }
+        .table td { vertical-align: middle; }
+        .button-delete { display: inline; }
+        .table-margin { margin-top: 15px; margin-bottom: 15px; }
+    </style>
+
+    <div class="row comment-margin">
+        <h1>{{ post.title }}</h1>
+    </div>
+
+    <div class="row">
+        <div class="card card-margin">
+            <p class="card-header"><i class="material-icons card-icons">person</i> {{ post.author.name }}  <i class="material-icons card-icons">category</i> {{ post.category.name }}</p>
+            <div class="card-body">
+                <p class="card-text text-content">{{ post.content }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row comment-margin">
+        <h3>Comentarios:</h3>
+
+        <table class="table text-center">
+        <thead>
+        <tr class="active">
+            <th class="text-center">Usuario</th>
+            <th class="text-center">Mensaje</th>
+            <th class="text-center">Fecha</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for comment in post.comments %}
+            <tr>
+                <td>{{ comment.user.name }}</td>
+                <td>{{ comment.message }}</td>
+                <td>{{ comment.publishedAt|date('d-m-Y') }}</td>
+                <td class="text-nowrap">
+                    <form class="button-delete" method="post" action="{{ path('admin.comment.delete', {id: comment.id}) }}" onsubmit="return confirm('¿Seguro que desea eliminar el Comentario?');">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ comment.id) }}">
+                        <button class="btn btn-outline-danger btn-sm"><i class="material-icons">delete_forever</i></a>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    </div>
+{% endblock %}

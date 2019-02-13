@@ -3,7 +3,9 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Post;
+use App\Entity\Comment;
 use App\Form\PostType;
+use App\Form\CommentType;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,7 +20,7 @@ class PostController extends AbstractController
     /**
      * Lists all posts entities.
      *
-     * @Route("/admin/post/{page}",
+     * @Route("/admin/post/list/{page}",
      *     name="admin.post.list",
      *     methods="GET",
      *     defaults={"page": 1},
@@ -80,6 +82,24 @@ class PostController extends AbstractController
     }
 
     /**
+     * Show post.
+     *
+     * @Route("/admin/post/{id}", name="admin.post.show", methods="GET|POST")
+     *
+     * @param Request $request
+     * @param EntityManagerInterface $em
+     * @param Post $post
+     *
+     * @return Response
+     */
+    public function show(Request $request, EntityManagerInterface $em, Post $post) : Response
+    {
+        return $this->render('admin/post/show.html.twig', [
+            'post' => $post,
+        ]);
+    }
+
+    /**
      * Edit post.
      *
      * @Route("/admin/post/{id}/edit", name="admin.post.edit", methods="GET|POST", requirements={"id" = "\d+"})
@@ -125,5 +145,28 @@ class PostController extends AbstractController
         }
 
         return $this->redirectToRoute('admin.post.list');
+    }
+
+    /**
+     * Delete comment.
+     *
+     * @Route("/admin/comment/{id}/delete", name="admin.comment.delete", methods="DELETE", requirements={"id" = "\d+"})
+     *
+     * @param Request $request
+     * @param EntityManagerInterface $em
+     * @param Comment $comment
+     *
+     * @return Response
+     */
+    public function deleteComment(Request $request, EntityManagerInterface $em, Comment $comment) : Response
+    {
+        if ($this->isCsrfTokenValid('delete' . $comment->getId(), $request->request->get('_token'))) {
+            $em->remove($comment);
+            $em->flush();
+        }
+
+        return $this->render('admin/post/show.html.twig', [
+            'post' => $comment->getPost(),
+        ]);
     }
 }
