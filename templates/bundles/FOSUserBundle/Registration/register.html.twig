@@ -1,0 +1,20 @@
+{% extends 'structure.html.twig' %}
+
+{% block mainbody %}
+
+    <style>
+        .card-header{ text-align: center; }
+        .card { margin: 0 auto; float: none; margin-bottom: 10px; margin-top: 100px; }
+        .btn-toolbar { justify-content: space-around; }
+        .btn { width: 200px; }
+    </style>
+
+    <div class="container">
+        <div class="card bg-light mb-3 border-primary" style="max-width: 35rem;">
+            <div class="card-header"><h5>BLOG</h5></div>
+            <div class="card-body">
+                {% include "@FOSUser/Registration/register_content.html.twig" %}
+            </div>
+        </div>
+    <div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'structure.html.twig' %}
+
+{% block mainbody %}
+
+    {% trans_default_domain 'FOSUserBundle' %}
+
+    <style>
+        .card-header{ text-align: center; }
+        .message{ text-align: center; }
+        .card { margin: 0 auto; float: none; margin-bottom: 10px; margin-top: 100px; }
+    </style>
+
+    <div class="container">
+        <div class="card bg-light mb-3 border-primary" style="max-width: 15rem;">
+            <div class="card-header"><h5>Bienvenido</h5></div>
+            <div class="card-body">
+                <p class="message">{{ '¡Su registro fue un éxito!'|trans({'%username%': user.username}) }}</p>
+                <a class="btn btn-outline-primary btn-block" role="button" href="{{ path('home') }}">Ir al Inicio</a>
+            </div>
+        </div>
+    <div>
+{% endblock %}

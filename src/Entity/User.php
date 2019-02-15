@@ -22,17 +22,7 @@ class User extends BaseUser
     /**
      * @ORM\Column(type="string")
      */
-    private $name;
-
-    // /**
-    //  * @ORM\Column(type="string")
-    //  */
-    // protected $email;
-
-    // /**
-    //  * @ORM\Column(type="string")
-    //  */
-    // protected $password;
+    protected $name;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Post", mappedBy="author", orphanRemoval=true)
