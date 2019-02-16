@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {% trans_default_domain 'FOSUserBundle' %}
+
+    <style>
+        .card { padding-bottom: 35px }
+        .card-margin { margin-top: 20px; }
+        .button-rigth { position: absolute; right: 0px; margin-right: 20px; }
+    </style>
+
+    <div class="card card-margin">
+
+        <h4 class="card-header">Perfil</h4>
+
+        <div class="card-body">
+            <div class="col-sm-6">
+                <p>Nombre: {{ user.name }}</p>
+            </div>
+            <div class="col-sm-6">
+                <p>Usuario: {{ user.username }}</p>
+            </div>
+            <div class="col-sm-6">
+                <p>Correo Electrónico: {{ user.email }}</p>
+            </div>
+            <div class="col-sm-6">
+                <p>Contraseña: <a href="{{ path('home') }}">Modificarla</a></p>
+            </div>
+            <a href="{{ path('fos_user_profile_edit') }}" class="btn btn-outline-primary button-rigth">Editar Perfil</a>
+        </div>
+    </div>
+{% endblock %}

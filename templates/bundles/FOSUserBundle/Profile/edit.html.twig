@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <style>
+        {# .card { padding-bottom: 35px } #}
+        .card-margin { margin-top: 20px; }
+        .button-rigth { position: absolute; right: 0px; margin-right: 20px; }
+    </style>
+
+    <div class="card card-margin">
+        <h4 class="card-header">Editar Perfil</h4>
+
+        <div class="card-body">
+            {% include "@FOSUser/Profile/edit_content.html.twig" %}
+        </div>
+    </div>
+{% endblock %}
+
+{# 
+
+SE PUEDE SEGUIR AGREGANDO COSAS, como check_email y confirmed, reset password, etc.
+ver el siguiente enlace para saber la ubicación de los archivos
+https://github.com/FriendsOfSymfony/FOSUserBundle/tree/master/Resources/views 
+
+#}

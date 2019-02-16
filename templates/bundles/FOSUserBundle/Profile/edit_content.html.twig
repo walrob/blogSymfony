@@ -1,0 +1,40 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+{{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
+    {# Para poder agregar el NAME se debe crear un Form para Edit, al igual que se hizo para Register #}
+    
+    {# <div class="form-group row">
+        <label for="name" class="col-sm-4 col-form-label">Nombre</label>
+        <div class="col-sm-8">
+            {{ form_widget(form.name) }}
+            {{ form_errors(form.name) }}
+        </div>
+    </div> #}
+
+    <div class="form-group row">
+        <label for="username" class="col-sm-4 col-form-label">Usuario</label>
+        <div class="col-sm-8">
+            {{ form_widget(form.username) }}
+            {{ form_errors(form.username) }}
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="email" class="col-sm-4 col-form-label">Correo Electrónico</label>
+        <div class="col-sm-8">
+            {{ form_widget(form.email) }}
+            {{ form_errors(form.email) }}
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="password" class="col-sm-4 col-form-label">Contraseña para confirmar</label>
+        <div class="col-sm-8">
+            {{ form_widget(form.current_password) }}
+            {{ form_errors(form.current_password) }}
+        </div>
+    </div>
+
+    <a href="{{ path('fos_user_profile_show') }}" class="btn btn-outline-secondary">Volver atrás</a>
+    <button type="submit" class="btn btn-outline-primary button-rigth" id="_submit" name="_submit">Guardar Cambios</button>
+{{ form_end(form) }}
